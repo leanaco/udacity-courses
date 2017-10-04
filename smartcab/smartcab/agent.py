@@ -25,6 +25,7 @@ class LearningAgent(Agent):
         # Set any additional class parameters as needed
 
 
+
     def reset(self, destination=None, testing=False):
         """ The reset function is called at the beginning of each trial.
             'testing' is set to True if testing trials are being used
@@ -39,6 +40,7 @@ class LearningAgent(Agent):
         # Update epsilon using a decay function of your choice
         # Update additional class parameters as needed
         # If 'testing' is True, set epsilon and alpha to 0
+        
 
         return None
 
@@ -64,7 +66,7 @@ class LearningAgent(Agent):
         
         
         # Set 'state' as a tuple of relevant data for the agent        
-        state = None
+        state = (waypoint, inputs['light'], inputs['left'], inputs['oncoming'])
 
         return state
 
