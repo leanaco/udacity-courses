@@ -25,7 +25,7 @@ class LearningAgent(Agent):
         # Set any additional class parameters as needed
         random.seed(7)
         self.t = 0 # for setting the decay function of epsilon
-        self.a = 0.05
+        self.a = 0.01
 
 
     def reset(self, destination=None, testing=False):
@@ -215,7 +215,7 @@ def run():
     # Flags:
     #   tolerance  - epsilon tolerance before beginning testing, default is 0.05 
     #   n_test     - discrete number of testing trials to perform, default is 0
-    sim.run(n_test=10, tolerance=0.005)
+    sim.run(n_test=10) #, tolerance=0.01)
 
 
 if __name__ == '__main__':
