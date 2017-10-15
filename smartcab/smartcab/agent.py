@@ -24,8 +24,9 @@ class LearningAgent(Agent):
         ###########
         # Set any additional class parameters as needed
         random.seed(7)
-        self.t = 0 # for setting the decay function of epsilon
-        self.a = 0.01
+        # for setting the decay function of epsilon:
+        self.t = 0 
+        self.a = 0.01 
 
 
     def reset(self, destination=None, testing=False):
@@ -48,13 +49,13 @@ class LearningAgent(Agent):
         else :
             # initial decay function for default Q-Learning agent
             # self.epsilon = self.epsilon - 0.05
+
             # decay functions for improving Q-Learning agent
             self.t += 1.0
             # self.epsilon = self.a**self.t
             # self.epsilon = 1.0/self.t**2
             self.epsilon = math.exp(-self.a * self.t)
             # self.epsilon = math.fabs(math.cos(self.a*self.t))
-
 
         return None
 
@@ -133,11 +134,13 @@ class LearningAgent(Agent):
         if (not self.learning) or (self.epsilon >= random.random()) :
             action = random.choice(self.valid_actions)
         else :
+            # choose action with highest Q-value 
             max_actions = []
             max_q = self.get_maxQ(state)
             for a in self.valid_actions:
                 if max_q == self.Q[state][a]:
                     max_actions.append(a)
+            # randomly choose an action if there is a tie for highest Q-value
             action = random.choice(max_actions)
 
         return action
@@ -193,7 +196,7 @@ def run():
     #   learning   - set to True to force the driving agent to use Q-learning
     #    * epsilon - continuous value for the exploration factor, default is 1
     #    * alpha   - continuous value for the learning rate, default is 0.5
-    agent = env.create_agent(LearningAgent, learning=True, alpha=0.6)
+    agent = env.create_agent(LearningAgent, learning=True)
     
     ##############
     # Follow the driving agent
@@ -215,7 +218,7 @@ def run():
     # Flags:
     #   tolerance  - epsilon tolerance before beginning testing, default is 0.05 
     #   n_test     - discrete number of testing trials to perform, default is 0
-    sim.run(n_test=10) #, tolerance=0.01)
+    sim.run(n_test=10)
 
 
 if __name__ == '__main__':
