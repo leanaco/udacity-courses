@@ -55,7 +55,7 @@ class LearningAgent(Agent):
             # self.epsilon = self.a**self.t
             # self.epsilon = 1.0/self.t**2
             self.epsilon = math.exp(-self.a * self.t)
-            # self.epsilon = math.fabs(math.cos(self.a*self.t))
+            # self.epsilon = math.cos(self.a*self.t)
 
         return None
 
@@ -78,7 +78,7 @@ class LearningAgent(Agent):
         # constraints in order for you to learn how to adjust epsilon and alpha, and thus learn about the balance between exploration and exploitation.
         # With the hand-engineered features, this learning process gets entirely negated.
         
-        # Set 'state' as a tuple of relevant data for the agent        
+        # Set 'state' as a tuple of relevant data for the agent - Question 4       
         state = (waypoint, inputs['light'], inputs['left'], inputs['oncoming'])
 
         return state
@@ -140,7 +140,7 @@ class LearningAgent(Agent):
             for a in self.valid_actions:
                 if max_q == self.Q[state][a]:
                     max_actions.append(a)
-            # randomly choose an action if there is a tie for highest Q-value
+            # now randomly choose an action if there is a tie for highest Q-value
             action = random.choice(max_actions)
 
         return action
